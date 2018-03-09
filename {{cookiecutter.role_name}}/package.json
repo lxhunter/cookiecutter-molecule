@@ -7,7 +7,7 @@
     "url": "git+ssh://github.com/brandfrisch/{{ cookiecutter.role_name }}.git"
   },
   "author": "{{ cookiecutter.author }}",
-  "license": "{{ cookiecutter.license }}",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/brandfrisch/{{ cookiecutter.role_name }}/issues"
   },

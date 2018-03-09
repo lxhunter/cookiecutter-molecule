@@ -3,7 +3,7 @@ galaxy_info:
   author: {{ cookiecutter.author }}
   description: {{ cookiecutter.description }}
   company: {{ cookiecutter.company }}
-  license: {{ cookiecutter.license }}
+  license: MIT
   min_ansible_version: {{ cookiecutter.min_ansible_version }}
   platforms:
     - name: Ubuntu
