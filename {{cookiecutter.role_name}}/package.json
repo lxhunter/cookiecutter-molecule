@@ -1,0 +1,46 @@
+{
+  "name": "{{ cookiecutter.role_name }}",
+  "version": "1.0.0",
+  "description": "{{ cookiecutter.description }}",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/brandfrisch/{{ cookiecutter.role_name }}.git"
+  },
+  "author": "{{ cookiecutter.author }}",
+  "license": "{{ cookiecutter.license }}",
+  "bugs": {
+    "url": "https://github.com/brandfrisch/{{ cookiecutter.role_name }}/issues"
+  },
+  "homepage": "https://github.com/brandfrisch/{{ cookiecutter.role_name }}#readme",
+  "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "precommit": "yamllint . && ansible-lint . -r /usr/local/src/ansible-lint/rules || exit 1",
+    "develop": "nodemon"
+  },
+  "commitlint": {
+    "extends": [
+      "./node_modules/@commitlint/config-conventional"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "yamllint . && ansible-lint . -r /usr/local/src/ansible-lint/rules || exit 1",
+    "ext": "yml"
+  },
+  "release": {
+    "tagFormat": "${version}",
+    "verifyConditions": [],
+    "publish": [
+      {
+        "path": "@semantic-release/github"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.1.2",
+    "@commitlint/config-conventional": "^6.1.2",
+    "@semantic-release/exec": "^2.0.1",
+    "husky": "^0.14.3",
+    "semantic-release": "^13.4.1",
+    "nodemon": "^1.17.1"
+  }
+}

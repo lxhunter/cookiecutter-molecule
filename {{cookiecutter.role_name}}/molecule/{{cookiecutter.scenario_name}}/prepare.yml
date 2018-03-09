@@ -1,5 +1,5 @@
 ---
 - name: Prepare
   hosts: all
-  gather_facts: False
-  tasks: []
+  gather_facts: false
+  pre_tasks: []

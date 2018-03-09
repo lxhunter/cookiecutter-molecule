@@ -1,20 +1,28 @@
 ---
 dependency:
-  name: gilt
+  name: galaxy
 driver:
   name: docker
 lint:
   name: yamllint
 platforms:
-  - name: instance-1
-    image: centos:7
+  - name: {{ cookiecutter.role_name }}-ubuntu-1604
+    image: brandfrisch/ubuntu-16.04:latest
+    privileged: true
+    command: /lib/systemd/systemd
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
+  options:
+    D: true
   lint:
     name: ansible-lint
+    options:
+      r: /usr/local/src/ansible-lint/rules
 scenario:
-  name: {{ cookiecutter.scenario_name }}
+  name: default
 verifier:
-  name: testinfra
+  name: goss
   lint:
-    name: flake8
+    name: 'None'

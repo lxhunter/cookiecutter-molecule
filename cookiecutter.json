@@ -1,9 +1,9 @@
 {
     "role_name": "role_name",
     "scenario_name": "default",
-    "author": "your name",
+    "author": "Alexander Jaeger",
     "description": "your description",
-    "company": "your company (optional)",
+    "company": "Brandfrisch",
     "license": ["BSD", "MIT", "GPLv2", "GPLv3", "Apache", "CC-BY"],
-    "min_ansible_version": 1.2
+    "min_ansible_version": 2.4
 }
