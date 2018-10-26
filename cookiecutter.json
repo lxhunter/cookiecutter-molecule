@@ -4,5 +4,6 @@
     "author": "Alexander Jaeger",
     "description": "your description",
     "company": "Brandfrisch",
+    "github_username": "brandfrisch",
     "min_ansible_version": 2.4
 }

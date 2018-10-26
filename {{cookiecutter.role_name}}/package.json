@@ -4,14 +4,14 @@
   "description": "{{ cookiecutter.description }}",
   "repository": {
     "type": "git",
-    "url": "git+ssh://github.com/brandfrisch/{{ cookiecutter.role_name }}.git"
+    "url": "git+ssh://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.role_name }}.git"
   },
   "author": "{{ cookiecutter.author }}",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brandfrisch/{{ cookiecutter.role_name }}/issues"
+    "url": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.role_name }}/issues"
   },
-  "homepage": "https://github.com/brandfrisch/{{ cookiecutter.role_name }}#readme",
+  "homepage": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.role_name }}#readme",
     "scripts": {
       "commitmsg": "commitlint -e $GIT_PARAMS",
       "precommit": "yamllint -c ./.yamllint . && ansible-lint -R -r ./node_modules/ansible-lint-rules/rules . || exit 1",
@@ -44,7 +44,7 @@
         "@semantic-release/github",
         {
           "path": "semantic-release",
-          "name": "brandfrisch/{{ cookiecutter.role_name }}"
+          "name": "{{ cookiecutter.github_username }}/{{ cookiecutter.role_name }}"
         }
       ],
       "tagFormat": "${version}"
