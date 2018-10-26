@@ -1,28 +1,39 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: requirements.yml
 driver:
   name: docker
 lint:
   name: yamllint
 platforms:
-  - name: {{ cookiecutter.role_name }}-ubuntu-1604
-    image: brandfrisch/ubuntu-16.04:latest
+  - name: {{ cookiecutter.role_name }}-1804
+    image: brandfrisch/ubuntu-18.04
+    command: /sbin/init
     privileged: true
-    command: /lib/systemd/systemd
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    docker_ssl_version: SSLv23
+  - name: {{ cookiecutter.role_name }}-1604
+    image: brandfrisch/ubuntu-16.04
+    command: /sbin/init
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    docker_ssl_version: SSLv23
 provisioner:
   name: ansible
   options:
-    D: true
+    D: True
   lint:
     name: ansible-lint
     options:
-      r: /usr/local/src/ansible-lint/rules
+      R: true
+      r: ./node_modules/ansible-lint-rules/rules
 scenario:
-  name: default
+  name: {{ cookiecutter.scenario_name }}
 verifier:
   name: goss
   lint:
-    name: 'None'
+    name: yamllint

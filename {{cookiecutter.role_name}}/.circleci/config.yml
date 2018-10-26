@@ -2,84 +2,51 @@
 version: 2
 jobs:
   build:
-    machine:
-      enabled: true
-
+    docker:
+      - image: docker:stable
     working_directory: ~/{{ cookiecutter.role_name }}
 
     steps:
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - checkout:
           path: ~/{{ cookiecutter.role_name }}
 
       - run:
-          name: "System package update"
-          command: |
-            sudo apt-get update
-
-      - run:
-          name: "Install python & tools"
-          command: |
-            sudo apt-get install -yq python python-pip
-            pip install --upgrade pip
-            pip install virtualenv
-
-      - run:
-          name: "Write daily cache key"
-          command: |
-            date +%F > ~/.daily_cache_key
-{% raw %}
-      - restore_cache:
-          keys:
-            - v4-dependencies-pip-{{ checksum "~/.daily_cache_key" }}
+          name: "Install pip"
+          command: "apk add --update python python-dev py-pip build-base openssl
+                    openssl-dev libffi-dev linux-headers"
 
       - run:
           name: "Install python dependencies"
-          command: |
-            virtualenv ~/.venv
-            source ~/.venv/bin/activate
-            pip install -r requirements.txt
-            deactivate
-
-      - save_cache:
-          paths:
-            - ~/.venv
-            - ~/.cache/pip
-          key: v4-dependencies-pip-{{ checksum "~/.daily_cache_key" }}
+          command: "pip install -r requirements.txt"
 
       - run:
-          name: "Run tests"
-          command: |
-            source ~/.venv/bin/activate
-            molecule test
+          name: "run tests"
+          command: "export DOCKER_TLS=true &&
+                    export DOCKER_CERT_PATH_CA=$DOCKER_CERT_PATH/ca.pem &&
+                    export DOCKER_CERT_PATH_CERT=$DOCKER_CERT_PATH/cert.pem &&
+                    export DOCKER_CERT_PATH_KEY=$DOCKER_CERT_PATH/key.pem &&
+                    export DOCKER_SSL_VERSION=SSLv23 &&
+                    molecule test"
 
   release:
     docker:
       - image: circleci/node:8
 
-    working_directory: ~/repo
+    working_directory: ~/{{ cookiecutter.role_name }}
 
     steps:
-      - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-node-{{ checksum "package.json" }}
+      - checkout:
+          path: ~/{{ cookiecutter.role_name }}
 
-      - run:
-          name: "Install node dependencies"
-          command: |
-            npm install
+      - run: "npm install @semantic-release/changelog &&
+              npm install @semantic-release/git &&
+              npx semantic-release"
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-node-{{ checksum "package.json" }}
-
-      - run:
-          name: "Release role"
-          command: |
-            ./node_modules/.bin/semantic-release
-{% endraw %}
 workflows:
   version: 2
 

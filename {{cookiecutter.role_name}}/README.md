@@ -44,4 +44,4 @@ License and Author
 
 Author:: [Alexander Jäger](https://github.com/lxhunter)
 
-Brandfrisch Copyright 2018
+{{ cookiecutter.company }} Copyright 2018

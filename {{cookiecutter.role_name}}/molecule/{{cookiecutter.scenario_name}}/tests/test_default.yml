@@ -1,1 +1,2 @@
 ---
+# {{ cookiecutter.scenario_name }} file for {{ cookiecutter.role_name }}
