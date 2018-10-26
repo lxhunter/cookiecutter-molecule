@@ -44,7 +44,7 @@
         "@semantic-release/github",
         {
           "path": "semantic-release",
-          "name": "trustedshops/ansible-hardening-base"
+          "name": "brandfrisch/{{ cookiecutter.role_name }}"
         }
       ],
       "tagFormat": "${version}"
