@@ -23,9 +23,19 @@ jobs:
           name: "Upgrade pip"
           command: "pip install --upgrade pip"
 
+      - restore_cache:
+          key: python-requirements-V1-{{ checksum "requirements.txt" }}
+
       - run:
-          name: "Install python dependencies"
-          command: "pip install -r requirements.txt"
+          name: Install Python dependencies
+          command: pip install -r requirements.txt
+
+      - save_cache:
+          key: python-requirements-V1-{{ checksum "requirements.txt" }}
+          paths:
+            - "~/.cache/pip"
+            - "/usr/local/lib/python2.7/site-packages"
+            - "/usr/local/lib/site-python"
 
       - run:
           name: "run tests"
@@ -34,6 +44,7 @@ jobs:
                     export DOCKER_CERT_PATH_CERT=$DOCKER_CERT_PATH/cert.pem &&
                     export DOCKER_CERT_PATH_KEY=$DOCKER_CERT_PATH/key.pem &&
                     export DOCKER_SSL_VERSION=SSLv23 &&
+                    export MOLECULE_DEBUG=false &&
                     molecule test"
 
   release:
