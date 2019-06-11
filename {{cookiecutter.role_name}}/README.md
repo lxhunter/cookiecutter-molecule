@@ -39,9 +39,11 @@ Contribute
 
 [Tutorial](http://kbroman.github.io/github_tutorial/pages/fork.html)
 
-License and Author
+Author 
 ==================
 
-Author:: [Alexander Jäger](https://github.com/lxhunter)
+:: Author {{ cookiecutter.author }}
+
+See LICENSE file
 
 {{ cookiecutter.company }} Copyright 2018
