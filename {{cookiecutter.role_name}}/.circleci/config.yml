@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "Upgrade pip"
           command: "pip install --upgrade pip"
-
+{% raw -%}
       - restore_cache:
           key: python-requirements-V1-{{ checksum "requirements.txt" }}
 
@@ -36,7 +36,7 @@ jobs:
             - "~/.cache/pip"
             - "/usr/local/lib/python2.7/site-packages"
             - "/usr/local/lib/site-python"
-
+{%- endraw %}
       - run:
           name: "run tests"
           command: "export DOCKER_TLS=true &&
