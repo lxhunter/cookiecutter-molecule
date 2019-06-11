@@ -39,11 +39,7 @@ Contribute
 
 [Tutorial](http://kbroman.github.io/github_tutorial/pages/fork.html)
 
-Author 
+License
 ==================
 
-:: Author {{ cookiecutter.author }}
-
-See LICENSE file
-
-{{ cookiecutter.company }} Copyright 2018
+See `LICENSE` file
