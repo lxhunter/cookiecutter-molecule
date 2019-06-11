@@ -1,9 +1,9 @@
 {
-    "role_name": "role_name",
+    "role_name": "ansible-role-name",
     "scenario_name": "default",
     "author": "Alexander Jaeger",
-    "description": "your description",
-    "company": "Brandfrisch",
-    "github_username": "brandfrisch",
-    "min_ansible_version": 2.4
+    "description": "A role to setup",
+    "company": "The Fittest. UG (haftungsbeschraenkt)",
+    "github_username": "the-fittest",
+    "min_ansible_version": 2.7
 }
